@@ -15,11 +15,13 @@ INS={}
 for row in df.values:
     date = row[0].strftime("%Y-%m-%d")
     time = row[0].strftime("%H:%M")
+    # row[1]: 0起床時 3就寝時 1朝食前 2昼食前 4夕食前 の補給インスリン単位が相当します
     if row[1] in [0,1,2,3,4]:
        p_record ={row[1]:{'time':time,'value':row[2]} }
     else :
         ihour=row[0].hour
         itime = row[0].strftime("%H:%M")
+        # 血糖値:便宜上、 朝5:00-9:00 昼11:00-14:00 夕17:00-20:00 の測定としています
         if ihour>=5 and ihour <9 :
            ihour='c_1'
         elif ihour>=11 and ihour <14 :
@@ -34,9 +36,7 @@ for row in df.values:
     else :
        INS[date] |=p_record
 
-for row in df.values:
-    date = row[0].strftime("%Y-%m-%d")
-
+# 日付ごとにデータを出力します。値が入らなかったところは0で出力されます
 for key in INS :
   c_1 = 0 if INS[key].get('c_1')==None else INS[key]['c_1']['value']
   c_2 = 0 if INS[key].get('c_2')==None else INS[key]['c_2']['value']
