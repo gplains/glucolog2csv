@@ -5,6 +5,7 @@
 # これは何？
 
 @flameeyes さんの glucometerutils で出力したログを日ごとのCSVに変換します
+
 自分がWindows10ユーザなので、Windows10のコマンドラインでしか試していません...
 
 # 使い方
@@ -16,3 +17,7 @@
  # 出力したログを取り込みます
  python glucolog2csv.py somefile.txt
  ```
+
+# 参照
+- glucometerutils
+  https://github.com/glucometers-tech/glucometerutils
